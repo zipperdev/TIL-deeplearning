@@ -3,11 +3,10 @@ import warnings
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mnist import MNIST
+from dataset.mnist import load_mnist
 from PIL import Image
 
 warnings.filterwarnings("ignore")
-mndata = MNIST("../mnist-data", gz=True, return_type="numpy")
 
 
 # 신경망
@@ -253,8 +252,7 @@ MNIST 데이터셋을 이용해 손글씨 숫자 추론 과정을 구현함
 MNIST 데이터셋 => 28x28 크기의 회색조 숫자 (0~9) 이미지 집합
 """
 
-x_train, t_train = mndata.load_training()
-x_test, t_test = mndata.load_testing()
+(x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, one_hot_label=True)
 
 print(x_train.shape, t_train.shape)
 print(x_test.shape, t_test.shape)
@@ -276,7 +274,7 @@ def show_img():
 """
 
 def get_data():
-    x_test, t_test = mndata.load_testing()
+    _, (x_test, t_test) = load_mnist(normalize=True, flatten=True, one_hot_label=False)
     return x_test, t_test
 
 def init_network():
@@ -342,7 +340,7 @@ X          W1        W2        W3        Y
 x, t = get_data()
 network = init_network()
 
-batch_size = 0
+batch_size = 100
 accuracy_cnt = 0
 
 for i in range(0, len(x), batch_size):

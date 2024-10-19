@@ -1,6 +1,4 @@
-import warnings
 import numpy as np
-from mnist import MNIST
 
 
 # 퍼셉트론
