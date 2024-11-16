@@ -89,7 +89,7 @@ def cross_entropy_error(y, t):
         y = y.reshape(1, y.size)
 
     batch_size = y.shape[0]
-    return -np.sum(np.log(y[np.arange(batch_size)] + 1e-7))
+    return -np.sum(* np.log(y[np.arange(batch_size), t] + 1e-7))
 
 
 """
@@ -250,7 +250,7 @@ def gradient_descent_history(f, init_x, lr=0.01, step_num=100):
 
     return x, np.array(x_history)
 
-x, x_history = gradient_descent_history(function_2, np.array([-3.0, 4.0]), lr=0.1, step_num=20)
+x, x_history = gradient_descent_history(function_2, np.array([-3.0, 4.0]), lr=0.1, step_num=40)
 
 plt.plot([-5, 5], [0, 0], "--b")
 plt.plot([0, 0], [-5, 5], "--b")
